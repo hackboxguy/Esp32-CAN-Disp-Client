@@ -73,7 +73,7 @@ void display_ui_render_main_screen(void) {
         display_draw_string(10, mid_y, "--- C  ---%  ---hPa", FONT_SMALL);
     }
 
-    // ===== BOTTOM SECTION: IAQ and Alcohol =====
+    // ===== BOTTOM SECTION: IAQ, CO2, and Alcohol =====
     uint8_t bot_y = 36;
 
     // IAQ with quality indicator
@@ -82,6 +82,13 @@ void display_ui_render_main_screen(void) {
         display_draw_printf(0, bot_y, FONT_SMALL, "IAQ:%d %s", g_sensor_data.iaq, quality);
     } else {
         display_draw_string(0, bot_y, "IAQ: ---", FONT_SMALL);
+    }
+
+    // CO2 equivalent level
+    if (!sensor_data_is_stale(SENSOR_IDX_BME680_IAQ)) {
+        display_draw_printf(70, bot_y, FONT_SMALL, "CO2:%d", g_sensor_data.co2_equiv);
+    } else {
+        display_draw_string(70, bot_y, "CO2:---", FONT_SMALL);
     }
 
     // Alcohol level
