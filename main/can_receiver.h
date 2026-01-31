@@ -13,8 +13,8 @@
 #include "esp_err.h"
 
 // CAN Bus Configuration
-#define CAN_TX_GPIO             4
-#define CAN_RX_GPIO             5
+#define CAN_TX_GPIO             5
+#define CAN_RX_GPIO             4
 #define CAN_BITRATE             500000  // 500 kbps
 
 // Task configuration
