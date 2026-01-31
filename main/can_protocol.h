@@ -13,13 +13,13 @@
 
 #include <stdint.h>
 
-// CAN Message IDs
-#define CAN_ID_VEML7700_LUX     0x0A2   // VEML7700 Lux Data (1 Hz)
-#define CAN_ID_BME680_ENV       0x0A3   // BME680 Environmental (0.33 Hz)
-#define CAN_ID_BME680_IAQ       0x0A4   // BME680 Air Quality (0.33 Hz)
-#define CAN_ID_MQ3_ALCOHOL      0x0A5   // MQ-3 Alcohol (1 Hz)
-#define CAN_ID_LD2410_PRESENCE  0x0A6   // LD2410 Presence (10 Hz)
-#define CAN_ID_SYSTEM_STATUS    0x0A7   // System Status (0.1 Hz)
+// CAN Message IDs (Node 0, base 0x100, 0x20 spacing per node)
+#define CAN_ID_VEML7700_LUX     0x100   // Ambient Light Data (1 Hz, offset 0x00)
+#define CAN_ID_BME680_ENV       0x101   // BME680 Environmental (0.33 Hz, offset 0x01)
+#define CAN_ID_BME680_IAQ       0x102   // BME680 Air Quality (0.33 Hz, offset 0x02)
+#define CAN_ID_MQ3_ALCOHOL      0x109   // MQ-3 Alcohol (1 Hz, offset 0x09)
+#define CAN_ID_LD2410_PRESENCE  0x107   // LD2410 Presence (10 Hz, offset 0x07)
+#define CAN_ID_SYSTEM_STATUS    0x10F   // System Status (0.1 Hz, offset 0x0F)
 
 // Message data lengths
 #define CAN_MSG_LEN_STANDARD    8
@@ -35,7 +35,7 @@
 #define IAQ_ACCURACY_HIGH           3
 
 /**
- * @brief VEML7700 Lux Data Message (0x0A2)
+ * @brief VEML7700 Lux Data Message (offset 0x00)
  * Update rate: 1 Hz
  *
  * NEW FORMAT: 3-byte lux value to support up to 16.7M lux (0-16,777,215)
@@ -52,7 +52,7 @@ typedef struct __attribute__((packed)) {
 } can_msg_veml7700_t;
 
 /**
- * @brief BME680 Environmental Data Message (0x0A3)
+ * @brief BME680 Environmental Data Message (offset 0x01)
  * Update rate: 0.33 Hz
  */
 typedef struct __attribute__((packed)) {
@@ -64,7 +64,7 @@ typedef struct __attribute__((packed)) {
 } can_msg_bme680_env_t;
 
 /**
- * @brief BME680 Air Quality Data Message (0x0A4)
+ * @brief BME680 Air Quality Data Message (offset 0x02)
  * Update rate: 0.33 Hz
  */
 typedef struct __attribute__((packed)) {
@@ -76,7 +76,7 @@ typedef struct __attribute__((packed)) {
 } can_msg_bme680_iaq_t;
 
 /**
- * @brief MQ-3 Alcohol Sensor Data Message (0x0A5)
+ * @brief MQ-3 Alcohol Sensor Data Message (offset 0x09)
  * Update rate: 1 Hz
  */
 typedef struct __attribute__((packed)) {
@@ -88,7 +88,7 @@ typedef struct __attribute__((packed)) {
 } can_msg_mq3_alcohol_t;
 
 /**
- * @brief LD2410 Presence Detection Message (0x0A6)
+ * @brief LD2410 Presence Detection Message (offset 0x07)
  * Update rate: 10 Hz
  */
 typedef struct __attribute__((packed)) {
@@ -101,7 +101,7 @@ typedef struct __attribute__((packed)) {
 } can_msg_ld2410_presence_t;
 
 /**
- * @brief System Status Message (0x0A7)
+ * @brief System Status Message (offset 0x0F)
  * Update rate: 0.1 Hz
  */
 typedef struct __attribute__((packed)) {

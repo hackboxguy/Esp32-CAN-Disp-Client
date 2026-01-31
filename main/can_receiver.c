@@ -191,6 +191,8 @@ static void process_can_message(const twai_message_t *message) {
         return;
     }
 
+    //ESP_LOGI(TAG, "RX frame ID=0x%03lX DLC=%d", message->identifier, message->data_length_code);
+
     switch (message->identifier) {
         case CAN_ID_VEML7700_LUX:
             parse_veml7700_msg(message->data);

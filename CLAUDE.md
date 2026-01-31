@@ -84,16 +84,16 @@ All CAN messages use **standard 11-bit identifiers** and **8-byte payloads**.
 
 | ID | Sensor | Data Fields | Update Rate | Checksum |
 |----|--------|-------------|-------------|----------|
-| **0x0A2** | VEML7700 | Lux (24-bit), Status, Sequence, Config | 1 Hz | Yes |
-| **0x0A3** | BME680 Env | Temp (°C×100), Humidity (%), Pressure (hPa×10), Status | 0.33 Hz | Yes |
-| **0x0A4** | BME680 IAQ | IAQ (0-500), Accuracy (0-3), CO2_equiv (ppm), VOC (ppm), Status | 0.33 Hz | No |
-| **0x0A5** | MQ-3 | Raw ADC, Rs/R0 (×1000), PPM estimate, Status, Sequence | 1 Hz | No |
-| **0x0A6** | LD2410 | Presence (bool), Distance (cm), Move Energy, Static Energy, Status | 10 Hz | Yes |
-| **0x0A7** | System | Active sensors mask, Free heap (KB), Uptime (sec), Sequence | 0.1 Hz | No |
+| **0x100** | VEML7700 | Lux (24-bit), Status, Sequence, Config | 1 Hz | Yes |
+| **0x101** | BME680 Env | Temp (°C×100), Humidity (%), Pressure (hPa×10), Status | 0.33 Hz | Yes |
+| **0x102** | BME680 IAQ | IAQ (0-500), Accuracy (0-3), CO2_equiv (ppm), VOC (ppm), Status | 0.33 Hz | No |
+| **0x109** | MQ-3 | Raw ADC, Rs/R0 (×1000), PPM estimate, Status, Sequence | 1 Hz | No |
+| **0x107** | LD2410 | Presence (bool), Distance (cm), Move Energy, Static Energy, Status | 10 Hz | Yes |
+| **0x10F** | System | Active sensors mask, Free heap (KB), Uptime (sec), Sequence | 0.1 Hz | No |
 
 **All multi-byte values use little-endian encoding.**
 
-### Example: BME680 IAQ Message (0x0A4)
+### Example: BME680 IAQ Message (0x102)
 
 ```c
 typedef struct __attribute__((packed)) {
@@ -167,7 +167,7 @@ Current implementation (`display_ui_render_main_screen()`):
 
 1. **Define CAN message ID** in [main/can_protocol.h](main/can_protocol.h):
    ```c
-   #define CAN_ID_NEW_SENSOR  0x0A8
+   #define CAN_ID_NEW_SENSOR  0x10A  // Example: offset 0x0A from node 0 base
    ```
 
 2. **Define message structure** in [main/can_protocol.h](main/can_protocol.h):
@@ -319,7 +319,7 @@ idf.py menuconfig         # Interactive configuration menu
 - **Modified:** [main/display_ui.c](main/display_ui.c) lines 87-92
 - **Change:** Added CO2 equivalent value (ppm) from BME680 IAQ message to display layout
 - **Location:** Right side of IAQ line, format: `CO2:450`
-- **Data source:** `g_sensor_data.co2_equiv` (already parsed from CAN ID 0x0A4)
+- **Data source:** `g_sensor_data.co2_equiv` (already parsed from CAN ID 0x102)
 
 ---
 

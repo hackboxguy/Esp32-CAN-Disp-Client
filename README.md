@@ -37,12 +37,12 @@ The client receives the following CAN message IDs:
 
 | ID    | Sensor       | Data                              | Update Rate |
 |-------|--------------|-----------------------------------|-------------|
-| 0x0A2 | VEML7700     | Lux value (3-byte, 0-120K), status | 1 Hz        |
-| 0x0A3 | BME680       | Temperature, humidity, pressure   | 0.33 Hz     |
-| 0x0A4 | BME680       | IAQ, CO2 equiv, VOC               | 0.33 Hz     |
-| 0x0A5 | MQ-3         | Alcohol PPM, ADC, Rs/R0 ratio     | 1 Hz        |
-| 0x0A6 | LD2410       | Presence, distance, energy levels | 10 Hz       |
-| 0x0A7 | System       | Active sensors, heap, uptime      | 0.1 Hz      |
+| 0x100 | VEML7700     | Lux value (3-byte, 0-120K), status | 1 Hz        |
+| 0x101 | BME680       | Temperature, humidity, pressure   | 0.33 Hz     |
+| 0x102 | BME680       | IAQ, CO2 equiv, VOC               | 0.33 Hz     |
+| 0x109 | MQ-3         | Alcohol PPM, ADC, Rs/R0 ratio     | 1 Hz        |
+| 0x107 | LD2410       | Presence, distance, energy levels | 10 Hz       |
+| 0x10F | System       | Active sensors, heap, uptime      | 0.1 Hz      |
 
 See [main/can_protocol.h](main/can_protocol.h) for complete message format definitions.
 
